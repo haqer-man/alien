@@ -36,7 +36,7 @@ blk = tk.Canvas(blank, width=WIDTH, height=HEIGHT, bg="black")
 blk.pack()'''
 
 # initialize files and shuffle list
-path = './Alien/'
+path = dirname(realpath(__file__)) + '/Alien/'
 f = [s for s in listdir(path) if s.endswith(".mp3") and not s.startswith(".")]
 files = np.array(f)
 np.random.shuffle(files)
@@ -46,7 +46,7 @@ def filepath():
     for f in files:
         yield path + f
 
-gif = "./Alien.gif"
+gif = path + "Alien.gif"
 info = Image.open(gif)
 
 frames = info.n_frames # number of frames in gif
