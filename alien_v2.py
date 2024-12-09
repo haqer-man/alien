@@ -212,12 +212,15 @@ blk.pack()'''
 # initialize files and shuffle list
 path = dirname(realpath(__file__)) + "/"
 f = [s for s in listdir(path + "Alien/") if s.endswith(".mp3") and not s.startswith(".")]
+path = dirname(realpath(__file__)) + "/"
+f = [s for s in listdir(path + "Alien/") if s.endswith(".mp3") and not s.startswith(".")]
 files = np.array(f)
 np.random.shuffle(files)
 
 # generator function to iterate through shuffled list
 def filepath():
     for f in files:
+        yield path + "Alien/" + f
         yield path + "Alien/" + f
 
 gif = path + "Alien.gif"
