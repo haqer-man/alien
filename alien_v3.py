@@ -33,7 +33,7 @@ init()
 
 # initialize files and shuffle list
 path = dirname(realpath(__file__)) + "/"
-files = [s for s in listdir(path + "Alien/") if s.endswith(".mp3") and not s.startswith(".")]
+files = [s for s in listdir(path + "Alien/") if s.endswith(".ogg") and not s.startswith(".")]
 shuffle(files)
 
 # generator function to iterate through shuffled list
@@ -73,16 +73,16 @@ def stop_animation():
     fade_out_gif(root)
 
 def fade_in_gif(window, alpha_value=0.0):
-    if alpha_value < 1.0:
+    if window.attributes()[1] < 1.0:
         window.attributes('-alpha', alpha_value)
-        alpha_value += 0.05
+        alpha_value += 0.03
         window.after(50, fade_in_gif, window, alpha_value)
 
 def fade_out_gif(window, alpha_value=1.0):
     if window.attributes()[1] > 0.0:
         window.attributes('-alpha', alpha_value)
         alpha_value -= 0.05
-        window.after(50, fade_out_gif, window, alpha_value)
+        window.after(200, fade_out_gif, window, alpha_value)
 
 def fade_in_audio(volume=0.0):
     if music.get_volume() < 1.0:
