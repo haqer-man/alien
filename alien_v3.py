@@ -70,19 +70,20 @@ def animation(current_frame=0):
 
 def stop_animation():
     root.after_cancel(loop)
-    fade_out_gif(root)
 
 def fade_in_gif(window, alpha_value=0.0):
-    if window.attributes()[1] < 1.0:
+    print("Fading in " + str(alpha_value))
+    if window.attributes()[1] < 1.0 and alpha_value < 1.0:
         window.attributes('-alpha', alpha_value)
         alpha_value += 0.03
         window.after(50, fade_in_gif, window, alpha_value)
 
 def fade_out_gif(window, alpha_value=1.0):
-    if window.attributes()[1] > 0.0:
+    print("Fading out " + str(alpha_value))
+    if window.attributes()[1] > 0.0 and alpha_value > 0.0:
         window.attributes('-alpha', alpha_value)
         alpha_value -= 0.05
-        window.after(200, fade_out_gif, window, alpha_value)
+        window.after(50, fade_out_gif, window, alpha_value)
 
 def fade_in_audio(volume=0.0):
     if music.get_volume() < 1.0:
@@ -99,15 +100,15 @@ def fade_out_audio(volume=1.0):
         fade_out_audio(volume)
 
 def calculate_timing(duration):
-    start_time = randint(0, duration - 10)
-    played_duration = randint(5, duration - start_time)
+    min_play_time = 20
+    start_time = randint(0, duration - 2 * min_play_time)
+    played_duration = randint(min_play_time, duration - start_time)
 
     return start_time, played_duration
 
 def play_random_part_of_video():
     if not music.get_busy():
         fi = next(f)
-        print(fi)
         totalsec = 0
         with audioread.audio_open(fi) as fl: 
             totalsec = int(fl.duration)
@@ -126,19 +127,20 @@ def play_random_part_of_video():
         music.set_pos(start_time)
 
         pool.submit(fade_in_audio)
-        sleep(played_duration)
+        sleep(played_duration-3)
         root.after(20, fade_out_gif, root)
 
         fade_out_audio()
-        root.after(20, fade_out_gif, root)
         stop_animation()
         music.stop()
         music.unload()
 
 def main():
     while True:
+        sleep(randint(300, 3600))
+
         # sleep(randint(180,300))
-        sleep(5)
+        # sleep(5)
 
         play_random_part_of_video()
 
