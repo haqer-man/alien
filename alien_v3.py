@@ -72,14 +72,12 @@ def stop_animation():
     root.after_cancel(loop)
 
 def fade_in_gif(window, alpha_value=0.0):
-    print("Fading in " + str(alpha_value))
     if window.attributes()[1] < 1.0 and alpha_value < 1.0:
         window.attributes('-alpha', alpha_value)
         alpha_value += 0.03
         window.after(50, fade_in_gif, window, alpha_value)
 
 def fade_out_gif(window, alpha_value=1.0):
-    print("Fading out " + str(alpha_value))
     if window.attributes()[1] > 0.0 and alpha_value > 0.0:
         window.attributes('-alpha', alpha_value)
         alpha_value -= 0.05
@@ -137,9 +135,9 @@ def play_random_part_of_video():
 
 def main():
     while True:
-        sleep(randint(300, 3600))
+        # sleep(randint(300, 3600))
 
-        # sleep(randint(180,300))
+        sleep(randint(180,300))
         # sleep(5)
 
         play_random_part_of_video()
