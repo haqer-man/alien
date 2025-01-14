@@ -137,8 +137,8 @@ def main():
     while True:
         # sleep(randint(300, 3600))
 
-        sleep(randint(180,300))
-        # sleep(5)
+        # sleep(randint(180,300))
+        sleep(5)
 
         play_random_part_of_video()
 
